@@ -31,12 +31,6 @@ class WidgetsServiceProvider extends ServiceProvider
 
 			return new Widgets($app, $blade);
 		});
-
-		$this->app->booting(function($app) {
-			$file = app_path('widgets.php');
-
-			if (file_exists($file)) include $file;
-		});
 	}
 
 	protected function configureSapling()
