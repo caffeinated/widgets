@@ -158,7 +158,7 @@ class Widgets
 	 */
 	protected function createClassCallback($callback, array $parameters)
 	{
-		list($className, $method) = Str::parseCallback($callback, 'register');
+		list($className, $method) = Str::parseCallback($callback, 'run');
 
 		$instance = $this->container->make($className);
 
