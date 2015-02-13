@@ -1,0 +1,27 @@
+{
+    "name": "caffeinated/widgets",
+    "description": "Laravel 5 Widgets",
+    "keywords": ["widgets", "laravel", "caffeinated"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Shea Lewis",
+            "email": "shea.lewis89@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "~5.0",
+        "illuminate/filesystem": "~5.0",
+        "illuminate/view": "~5.0",
+        "illuminate/config": "~5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Caffeinated\\Widgets\\": "src/Caffeinated/Widgets/"
+        }
+    },
+    "suggest": {
+        "caffeinated/sapling": "Laravel 5.0 Twig integration package"
+    }
+}
