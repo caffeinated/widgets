@@ -24,6 +24,11 @@ class WidgetsServiceProvider extends ServiceProvider
 		$this->configureSapling();
 	}
 
+	/**
+	 * Register the package services.
+	 *
+	 * @return void
+	 */
 	protected function registerServices()
 	{
 		$this->app->bindShared('widgets', function($app) {
@@ -33,6 +38,14 @@ class WidgetsServiceProvider extends ServiceProvider
 		});
 	}
 
+	/**
+	 * Configure Sapling
+	 *
+	 * Configures Sapling (Twig) extensions if the Sapling package
+	 * is found to be installed.
+	 *
+	 * @return void
+	 */
 	protected function configureSapling()
 	{
 		if ($this->app['config']->has('sapling')) {
