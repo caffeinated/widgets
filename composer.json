@@ -23,12 +23,5 @@
     },
     "suggest": {
         "caffeinated/sapling": "Laravel 5.0 Twig integration package"
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.0.x-dev"
-        }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
