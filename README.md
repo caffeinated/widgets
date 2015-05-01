@@ -6,7 +6,7 @@ Abstraction layer between Blade/Twig to allow the means to "plug in" data throug
 Quick Usage
 -----------
 Build your widget:
-**app\Plugins\YourPlugin.php**
+**app\Widgets\YourWidget.php**
 ```php
 <?php
 namespace App\Widgets;
