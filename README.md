@@ -26,12 +26,12 @@ Once this operation is complete, simply add the service provider class and facad
 
 ##### Service Provider
 ```php
-Caffeinated\Menus\WidgetsServiceProvider::class,
+Caffeinated\Widgets\WidgetsServiceProvider::class,
 ```
 
 ##### Facade
 ```php
-'Widget' => Caffeinated\Widgets\Facades\Menu::class,
+'Widget' => Caffeinated\Widgets\Facades\Widget::class,
 ```
 
 And that's it! With your coffee in reach, start building out some awesome widgets!
