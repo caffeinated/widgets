@@ -31,10 +31,10 @@ class WidgetsServiceProvider extends ServiceProvider
 	 */
 	protected function registerServices()
 	{
-		$this->app->bindShared('widgets', function($app) {
-			$blade = $app['view']->getEngineResolver()->resolve('blade')->getCompiler();
+		$this->app->bindShared('widgets', function() {
+			$config = array();
 
-			return new Widgets($app, $blade);
+			return new WidgetFactory($config);
 		});
 	}
 

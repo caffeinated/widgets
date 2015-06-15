@@ -28,7 +28,7 @@ class Widget extends Twig_Extension
 			new Twig_SimpleFunction('widget_*', function ($name) {
 					$arguments = array_slice(func_get_args(), 1);
 
-					return \Widget::call($name, $arguments);
+					return \Widget::$name($arguments);
 				}, ['is_safe' => ['html']]
 			),
 		];
