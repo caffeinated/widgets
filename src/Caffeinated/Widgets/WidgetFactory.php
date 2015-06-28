@@ -1,11 +1,16 @@
 <?php
 namespace Caffeinated\Widgets;
 
-use App;
+use Illuminate\Foundation\Application;
 use Caffeinated\Widgets\Exceptions\InvalidWidgetException;
 
 class WidgetFactory
 {
+	/**
+	 * @var \Illuminate\Foundation\Application
+	 */
+	protected $app;
+
 	/**
 	 * Widget Config options
 	 *
@@ -24,8 +29,9 @@ class WidgetFactory
 	 * @param  array  $config
 	 * @return void
 	 */
-	public function __construct($config)
+	public function __construct(Application $app, $config)
 	{
+		$this->app    = $app;
 		$this->config = $config;
 	}
 
@@ -90,7 +96,7 @@ class WidgetFactory
 		$className   = studly_case($signature);
 		$namespace   = $this->determineNamespace($className);
 		$widgetClass = $namespace.'\\'.$className;
-		$widget      = App::make($widgetClass);
+		$widget      = $this->app->make($widgetClass);
 
 		if ($widget instanceof Widget === false) {
 			throw new InvalidWidgetException;
