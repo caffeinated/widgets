@@ -1,6 +1,7 @@
 <?php
 namespace Caffeinated\Widgets;
 
+use App;
 use Caffeinated\Widgets\Exceptions\InvalidWidgetException;
 
 class WidgetFactory
@@ -11,6 +12,11 @@ class WidgetFactory
 	 * @var array
 	 */
 	protected $config;
+
+	/**
+	 * @var array
+	 */
+	protected $namespace = array();
 
 	/**
 	 * Create a new factory instance.
@@ -24,25 +30,15 @@ class WidgetFactory
 	}
 
 	/**
-	 * Magic method to call widget instances.
+	 * Register a new namespace location where widgets may be found.
 	 *
-	 * @param  string  $signature
-	 * @param  array   $arguments
-	 * @return mixed
+	 * @param  string  $namespace
 	 */
-	public function __call($signature, $arguments)
+	public function register($namespace)
 	{
-		$arguments   = $this->flattenArguments($arguments);
-		$className   = studly_case($signature);
-		$namespace   = $this->determineNamespace($className);
-		$widgetClass = $namespace.'\\'.$className;
-		$widget      = new $widgetClass($arguments);
-
-		if ($widget instanceof Widget === false) {
-			throw new InvalidWidgetException;
+		if (! array_key_exists($namespace, $this->namespace)) {
+			$this->namespace[] = $namespace;
 		}
-
-		return $widget->handle();
 	}
 
 	/**
@@ -53,17 +49,55 @@ class WidgetFactory
 	 */
 	protected function determineNamespace($className)
 	{
+		if (count($this->namespace) > 0) {
+			foreach ($this->namespace as $namespace) {
+				if (class_exists($namespace.'\\'.$className)) {
+					return $namespace;
+				}
+			}
+		}
+
 		return 'App\\Widgets';
 	}
 
-	protected function flattenArguments(array $arguments)
+	/**
+	 * Flattens the given array.
+	 *
+	 * @param  array  $parameters
+	 * @return array
+	 */
+	protected function flattenParameters(array $parameters)
 	{
 		$flattened = array();
 
-		array_walk_recursive($arguments, function($value, $key) use (&$flattened) {
+		array_walk_recursive($parameters, function($value, $key) use (&$flattened) {
 			$flattened[$key] = $value;
 		});
 
 		return $flattened;
+	}
+
+	/**
+	 * Magic method to call widget instances.
+	 *
+	 * @param  string  $signature
+	 * @param  array   $parameters
+	 * @return mixed
+	 */
+	public function __call($signature, $parameters)
+	{
+		$parameters  = $this->flattenParameters($parameters);
+		$className   = studly_case($signature);
+		$namespace   = $this->determineNamespace($className);
+		$widgetClass = $namespace.'\\'.$className;
+		$widget      = App::make($widgetClass);
+
+		if ($widget instanceof Widget === false) {
+			throw new InvalidWidgetException;
+		}
+
+		$widget->registerParameters($parameters);
+
+		return $widget->handle();
 	}
 }
