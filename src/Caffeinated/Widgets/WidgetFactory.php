@@ -24,7 +24,7 @@ class WidgetFactory
 	 */
 	public function __construct(Application $app)
 	{
-		$this->app    = $app;
+		$this->app = $app;
 	}
 
 	/**
