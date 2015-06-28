@@ -12,13 +12,6 @@ class WidgetFactory
 	protected $app;
 
 	/**
-	 * Widget Config options
-	 *
-	 * @var array
-	 */
-	protected $config;
-
-	/**
 	 * @var array
 	 */
 	protected $namespace = array();
@@ -26,13 +19,12 @@ class WidgetFactory
 	/**
 	 * Create a new factory instance.
 	 *
-	 * @param  array  $config
+	 * @param  Illuminate\Foundation\Application  $app
 	 * @return void
 	 */
-	public function __construct(Application $app, $config)
+	public function __construct(Application $app)
 	{
 		$this->app    = $app;
-		$this->config = $config;
 	}
 
 	/**
