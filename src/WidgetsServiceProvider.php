@@ -31,7 +31,7 @@ class WidgetsServiceProvider extends ServiceProvider
 	 */
 	protected function registerServices()
 	{
-		$this->app->bindShared('widgets', function($app) {
+		$this->app->singleton('widgets', function($app) {
 			return new WidgetFactory($app['app']);
 		});
 	}

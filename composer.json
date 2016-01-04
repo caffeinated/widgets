@@ -11,12 +11,12 @@
     ],
     "require": {
         "php": ">=5.5.9",
-        "illuminate/support": "5.1.*",
-        "illuminate/config": "5.1.*"
+        "illuminate/support": "5.1.*|5.2.*",
+        "illuminate/config": "5.1.*|5.2.*"
     },
     "autoload": {
         "psr-4": {
-            "Caffeinated\\Widgets\\": "src/Caffeinated/Widgets/"
+            "Caffeinated\\Widgets\\": "src/"
         }
     },
     "suggest": {
