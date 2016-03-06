@@ -68,9 +68,11 @@ class WidgetFactory
 	{
 		$flattened = array();
 
-		array_walk_recursive($parameters, function($value, $key) use (&$flattened) {
-			$flattened[$key] = $value;
-		});
+		foreach($parameters as $parameter) {
+			array_walk($parameter, function($value, $key) use (&$flattened) {
+				$flattened[$key] = $value;
+			});
+		}
 
 		return $flattened;
 	}
